@@ -1,19 +1,14 @@
 [org 0x7c00]
-	mov bp,0x8000 ;sets the stack frame away from us
+	mov bp,0x8000 
 	mov sp,bp
-
-	mov bx,0x9000 ;sets the es to bx ---> es:bx = 0x09000
-	mov dh,2 ;the amount of sectors we want to read
-	;the bios sets dl for our boot disk num
+	mov bx,0x9000 
+	mov dh,2 
 	call disk_load
-	
 	mov dx,[0x9000]
 	call print_hex
 	call print_nl
-	
 	mov dx,[0x9000+512]
 	call print_hex
-	
 	jmp $
 
 %include "boot_sect_print.asm"
